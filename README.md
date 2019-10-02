@@ -10,14 +10,18 @@
 
 ## GIỚI THIỆU DỰ ÁN: STEGANOPY
 
-- Tính năng chính:
-  - Cho phép ẩn giấu 1 nguồn dữ liệu bất kì vào trong 1 file ảnh
-  - Cho phép trích xuất dữ liệu được ẩn giấu đó
-- Là 1 web app được xây dựng hoàn toàn theo kiến trúc serverless
-- Viết bằng Python (xử lý ảnh); Node.js và Vue.js (web app)
+### Tính năng chính
+- Ân giấu 1 nguồn dữ liệu bất kì vào trong 1 file ảnh
+- Trích xuất dữ liệu được ẩn giấu đó
+
+### Công nghệ được sử dụng
+- Sử dụng kĩ thuật LSB (least significant bit(s) technique)
+- Web app được xây dựng theo kiến trúc serverless
+- Viết bằng Python, Node.js và Vue.js
 - Deploy trên nền tảng Zeit Now
 
 ## CÁCH THỨC ĐÁNH GIÁ
 
-- Web app hoạt động ổn định
+- Web app hoạt động ổn định và phản hồi nhanh
 - Đáp ứng đầy đủ 2 tính năng cốt lõi trên
+- Giao diện thân thiện với cả máy tính và điện thoại
