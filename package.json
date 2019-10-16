@@ -3,7 +3,7 @@
   "name": "steganopy",
   "description": "Steganopy",
   "license": "MIT",
-  "author": "Luong Quang Manh",
+  "author": "Luong Quang Manh <luongquangmanh85@gmail.com>",
   "repository": "github:lqmanh/steganopy",
   "version": "0.0.1",
   "engines": {
