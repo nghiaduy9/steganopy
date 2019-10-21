@@ -56,3 +56,6 @@ jspm_packages/
 
 # Build output
 dist
+
+# Python virtualenv
+.venv
