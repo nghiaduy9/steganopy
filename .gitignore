@@ -59,3 +59,6 @@ dist
 
 # Python virtualenv
 .venv
+
+# VSCode project settings
+.vscode
