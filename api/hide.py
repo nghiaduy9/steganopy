@@ -1,4 +1,3 @@
-from datetime import datetime as dt
 import os
 from sanic import Sanic, response
 

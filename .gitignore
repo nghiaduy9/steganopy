@@ -63,3 +63,6 @@ dist
 
 # VSCode project settings
 .vscode
+
+# Secret files
+service-account-key.json

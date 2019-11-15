@@ -9,6 +9,7 @@ black = "*"
 [packages]
 pillow = "*"
 sanic = "*"
+firebase-admin = "*"
 
 [requires]
 python_version = "3.7"
