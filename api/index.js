@@ -1,1 +1,1 @@
-module.exports = (req, res) => res.json({ iam: '/' })
+module.exports = (req, res) => res.json({ iam: '/api' })

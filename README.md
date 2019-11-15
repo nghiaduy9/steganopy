@@ -1,27 +1,48 @@
 # Steganopy
 
-## ĐẶT VẤN ĐỀ
+## INSTALLATION
 
-## CLOUD COMPUTING VÀ SERVERLESS ARCHITECTURE
+### Requirements
 
-### Giới thiệu về cloud computing
+- Python >= 3.7
+- Node.js >= 10.0.0
+- Yarn
+- Pipenv
+- [Now CLI](https://www.npmjs.com/package/now)
 
-### Giới thiệu về serverless architecture
+### Instructions
 
-## GIỚI THIỆU DỰ ÁN: STEGANOPY
+```bash
+$ yarn install # install Node.js deps
+$ pipenv install # install Python deps
+$ now dev # start in local development env
+$ now # deploy to production env
+```
 
-### Tính năng chính
-- Ân giấu 1 nguồn dữ liệu bất kì vào trong 1 file ảnh
-- Trích xuất dữ liệu được ẩn giấu đó
+## DOCUMENTATION
 
-### Công nghệ được sử dụng
-- Sử dụng kĩ thuật LSB (least significant bit(s) technique)
-- Web app được xây dựng theo kiến trúc serverless
-- Viết bằng Python, Node.js và Vue.js
-- Deploy trên nền tảng Zeit Now
+### Routes
 
-## CÁCH THỨC ĐÁNH GIÁ
+#### 1. `/api`
 
-- Web app hoạt động ổn định và phản hồi nhanh
-- Đáp ứng đầy đủ 2 tính năng cốt lõi trên
-- Giao diện thân thiện với cả máy tính và điện thoại
+> Just for testing
+
+##### Response body
+
+- `iam`: "/api"
+
+#### 2. POST `/api/hide`
+
+> Hide data inside an image
+
+##### Response body
+
+- `url` (string): Public URL of the output image
+
+#### 3. POST `/api/save`
+
+> Save an image to Firebase Storage
+
+##### Response body
+
+- `url` (string): Public URL of the saved image
