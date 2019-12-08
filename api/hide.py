@@ -25,5 +25,6 @@ async def index(request, path):
         output_buffer = hide(cover_buffer, payload_buffer)
         url = save_to_storage(cover_img.name, output_buffer, "image/png")
         return response.json({"url": url})
-    except Exception:
+    except Exception as e:
+        print(e)
         return response.json({}, status=500)
