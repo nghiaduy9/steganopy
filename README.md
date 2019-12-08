@@ -38,11 +38,3 @@ $ now # deploy to production env
 ##### Response body
 
 - `url` (string): Public URL of the output image
-
-#### 3. POST `/api/save`
-
-> Save an image to Firebase Storage
-
-##### Response body
-
-- `url` (string): Public URL of the saved image

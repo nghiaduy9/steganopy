@@ -10,6 +10,7 @@ firebase-admin = "*"
 
 [dev-packages]
 black = "*"
+pylint = "*"
 
 [requires]
 

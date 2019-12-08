@@ -1,6 +1,10 @@
 import os
 from sanic import Sanic, response
 
+from api._stegano import hide
+from api._utils import save_to_storage
+
+
 app = Sanic()
 
 
@@ -14,12 +18,12 @@ async def index(request, path):
         return response.json({}, status=400)
 
     cover_img, payload_file = files[:2]
-    cover_name, cover_ext = os.path.splitext(cover_img.name)
     cover_buffer = cover_img.body
     payload_buffer = payload_file.body
 
-    #
-    # process
-    #
-
-    return response.json({})
+    try:
+        output_buffer = hide(cover_buffer, payload_buffer)
+        url = save_to_storage(cover_img.name, output_buffer, "image/png")
+        return response.json({"url": url})
+    except Exception:
+        return response.json({}, status=500)
