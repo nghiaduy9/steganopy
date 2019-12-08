@@ -13,10 +13,10 @@ async def index(request, path):
     if len(files) < 2:
         return response.json({}, status=400)
 
-    secret_file, cover_img = files[:2]
-    secret_body = secret_file.body
+    cover_img, payload_file = files[:2]
     cover_name, cover_ext = os.path.splitext(cover_img.name)
-    cover_body = cover_img.body
+    cover_buffer = cover_img.body
+    payload_buffer = payload_file.body
 
     #
     # process

@@ -1,5 +1,6 @@
 from datetime import datetime as dt
 import os
+
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
@@ -15,6 +16,8 @@ app = Sanic()
 
 @app.route("/<path:path>", methods=["POST"])
 async def index(request, path):
+    """Save a static file to Firebase Storage and return the URL."""
+
     if "files" not in request.files:
         return response.json({}, status=400)
 
@@ -22,13 +25,13 @@ async def index(request, path):
     if not len(files):
         return response.json({}, status=400)
 
-    img = files[0]
-    img_name, img_ext = os.path.splitext(img.name)
-    img_body = img.body
-    img_mime = img.type
+    file = files[0]
+    file_name, file_ext = os.path.splitext(file.name)
+    file_buffer = file.body
+    file_mime = file.type
 
-    blob = bucket.blob(f"{img_name}-{round(dt.utcnow().timestamp())}{img_ext}")
-    blob.upload_from_string(img_body, content_type=img_mime)
+    blob = bucket.blob(f"{file_name}-{round(dt.utcnow().timestamp())}{file_ext}")
+    blob.upload_from_string(file_buffer, content_type=file_mime)
     blob.make_public()
 
     return response.json({"url": blob.public_url})

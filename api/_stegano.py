@@ -5,11 +5,11 @@ class Stegano:
     def __init__(self):
         pass
 
-    def hide(self, img):
+    def hide(self, img_buffer: bytes, payload_buffer: bytes):
         pass
 
-    def analyse(self, img):
+    def analyse(self, img_buffer: bytes):
         pass
 
-    def reveal(self, img):
+    def reveal(self, img_buffer: bytes):
         pass
