@@ -12,7 +12,7 @@ class SteganopyException(Exception):
     pass
 
 
-def hide(img_buffer: bytes, payload_buffer: bytes) -> bytes:
+def conceal(img_buffer: bytes, payload_buffer: bytes) -> bytes:
     """Embed a payload into an image, and return the output image."""
 
     img = Image.open(BytesIO(img_buffer))
@@ -66,7 +66,7 @@ def analyse(img_buffer: bytes):
 def _validate_payload_size(img_w: int, img_h: int, payload_size: int) -> bool:
     """Return True if the payload is small enough, relative to the cover image."""
 
-    # hide data in 3 channels
+    # conceal data in 3 channels
     max_size = MAX_LSB / 8 * (3 * (img_w * img_h))  # bytes
     return payload_size <= max_size - 4  # need 4 bytes to store the payload size
 
