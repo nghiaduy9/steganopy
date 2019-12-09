@@ -79,6 +79,8 @@ def _decompose(data: bytes) -> list:
 def _assemble_int(bit_arr: np.ndarray) -> int:
     """Assemble a list of 32 bits to a 4-byte integer."""
 
+    assert len(bit_arr) == 32
+
     byte_arr = np.packbits(bit_arr)
     return struct.unpack("i", byte_arr)[0]
 
