@@ -25,16 +25,22 @@ $ now # deploy to production env
 
 #### 1. `/api`
 
-> Just for testing
+> Just for testing.
 
 ##### Response body
 
 - `iam`: "/api"
 
-#### 2. POST `/api/hide`
+#### 2. POST `/api/conceal`
 
-> Hide data inside an image
+> Embed data into an image.
 
 ##### Response body
 
 - `url` (string): Public URL of the output image
+
+#### 3. POST `/api/reveal`
+
+> Extract data from an image.
+
+##### Response body
