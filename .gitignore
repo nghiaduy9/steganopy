@@ -55,8 +55,8 @@ jspm_packages/
 *.lock
 
 # Build output
-dist
 .now
+.nuxt
 
 # Python virtualenv
 .venv
