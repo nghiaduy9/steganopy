@@ -1,8 +1,7 @@
 import os
 from sanic import Sanic, response
 
-from api._stegano import conceal
-from api._utils import save_to_storage
+from api._stegano import reveal
 
 
 app = Sanic()
@@ -13,17 +12,15 @@ async def index(request, path):
     if "files" not in request.files:
         return response.json({}, status=400)
     files = request.files["files"]
-    if len(files) < 2:
+    if len(files) < 1:
         return response.json({}, status=400)
 
-    cover_img, payload_file = files[:2]
-    cover_buffer = cover_img.body
-    payload_buffer = payload_file.body
+    img_file = files[0]
+    img_buffer = img_file.body
 
     try:
-        output_buffer = conceal(cover_buffer, payload_buffer)
-        url = save_to_storage(cover_img.name, output_buffer, "image/png")
-        return response.json({"url": url})
+        payload_buffer = reveal(img_buffer)
+        return response.raw(payload_buffer)
     except Exception as e:
         print(e)
         return response.json({}, status=500)
