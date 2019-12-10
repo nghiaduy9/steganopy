@@ -35,12 +35,22 @@ $ now # deploy to production env
 
 > Embed data into an image.
 
-##### Response body
+##### Request body (multipart/form-data)
 
-- `url` (string): Public URL of the output image
+- `files` (array): Array of 2 files: the former is the cover image, and the later is the payload data.
+
+##### Response body (application/json)
+
+- `url` (string): Public URL of the output image.
 
 #### 3. POST `/api/reveal`
 
 > Extract data from an image.
 
-##### Response body
+##### Request body (multipart/form-data)
+
+- `files` (array): Array of 1 file: the image containing embeded data.
+
+##### Response body (application/octet-stream)
+
+The payload data as a binary file.
