@@ -1,8 +1,36 @@
 <template>
   <div class="container">
-    <h1 class="title">Steganopy</h1>
-    <h2 class="subtitle">
-      Steganography with serverless architecture.
-    </h2>
+    <h3 class="title">Steganopy</h3>
+    <h5 class="subtitle">Steganography with serverless architecture.</h5>
+    <section class="section columns">
+      <div class="column">
+        <feature-card
+          title="Data concealing"
+          description="Embed data into an image."
+          url="/conceal"
+        />
+      </div>
+      <div class="column">
+        <feature-card
+          title="Data revealing"
+          description="Extract data from an image."
+          url="/reveal"
+        />
+      </div>
+    </section>
   </div>
 </template>
+
+<script>
+import FeatureCard from '../components/feature-card'
+
+export default {
+  components: { FeatureCard }
+}
+</script>
+
+<style scoped>
+.section {
+  padding: 3rem 0;
+}
+</style>

@@ -58,4 +58,7 @@
   height: 100vh;
   width: 100vw;
 }
+.section {
+  padding: 3rem 2rem;
+}
 </style>
