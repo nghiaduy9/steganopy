@@ -6,15 +6,15 @@
       </header>
       <div class="card-content">
         <div class="content">
-          <uploadForm
+          <upload-form
             title="Upload secret data file:"
-            :fileName="secretFileName"
+            :file-name="secretFileName"
             @input="changeSecretFile"
           />
-          <uploadForm
+          <upload-form
             title="Upload image to hide:"
-            acceptFile="image/*"
-            :fileName="imageFileName"
+            accept-file="image/*"
+            :file-name="imageFileName"
             @input="changeImageFile"
           />
           <div class="columns">

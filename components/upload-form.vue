@@ -25,7 +25,6 @@
 
 <script>
 export default {
-  name: 'uploadForm',
   props: ['title', 'acceptFile', 'fileName', 'value']
 }
 </script>

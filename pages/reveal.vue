@@ -6,10 +6,10 @@
       </header>
       <div class="card-content">
         <div class="content">
-          <uploadForm
+          <upload-form
             title="Upload image to decode:"
-            acceptFile="image/*"
-            :fileName="imageFileName"
+            accept-file="image/*"
+            :file-name="imageFileName"
             @input="changeImageFile"
           />
           <div class="columns">
