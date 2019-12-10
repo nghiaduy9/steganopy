@@ -14,7 +14,8 @@ export default {
         content: process.env.npm_package_description || ''
       }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
+    script: [{ src: 'https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js', body: true }]
   },
   /*
    ** Customize the progress-bar color

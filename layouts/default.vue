@@ -4,32 +4,50 @@
       <p class="menu-label">General</p>
       <ul class="menu-list">
         <li>
-          <nuxt-link to="/">Home</nuxt-link>
+          <nuxt-link to="/">
+            <ion-icon name="home" />
+            &nbsp;Home
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/conceal">Data concealing</nuxt-link>
+          <nuxt-link to="/conceal">
+            <ion-icon name="eye-off" />
+            &nbsp;Data concealing
+          </nuxt-link>
         </li>
         <li>
-          <nuxt-link to="/reveal">Data revealing</nuxt-link>
+          <nuxt-link to="/reveal">
+            <ion-icon name="eye" />
+            &nbsp;Data revealing
+          </nuxt-link>
         </li>
       </ul>
       <p class="menu-label">Resources</p>
       <ul class="menu-list">
         <li>
-          <a href="https://github.com/lqmanh/steganopy">Github</a>
+          <a href="https://github.com/lqmanh/steganopy">
+            <ion-icon name="logo-github" />
+            &nbsp;Github
+          </a>
         </li>
       </ul>
       <p class="menu-label">Authors</p>
       <ul class="menu-list">
         <li>
-          <a href="https://github.com/lqmanh">Lương Quang Mạnh</a>
+          <a href="https://github.com/lqmanh">
+            <ion-icon name="person"></ion-icon>
+            &nbsp;Lương Quang Mạnh
+          </a>
         </li>
         <li>
-          <a href="https://github.com/nghiaduy9">Ngô Đức Nghĩa</a>
+          <a href="https://github.com/nghiaduy9">
+            <ion-icon name="person"></ion-icon>
+            &nbsp;Ngô Đức Nghĩa
+          </a>
         </li>
       </ul>
     </aside>
-    <div class="column">
+    <div class="section column">
       <nuxt />
     </div>
   </div>
