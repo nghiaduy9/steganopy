@@ -27,7 +27,7 @@ $ now # deploy to production env
 
 > Just for testing.
 
-##### Response body
+##### Response body (application/json)
 
 - `iam`: "/api"
 
@@ -43,7 +43,15 @@ $ now # deploy to production env
 
 - `url` (string): Public URL of the output image.
 
-#### 3. POST `/api/reveal`
+#### 3. `/api/conceal/testing`
+
+> Testing route for route #2.
+
+##### Response body (application/json)
+
+- `url` (string): Public URL of a sample image.
+
+#### 4. POST `/api/reveal`
 
 > Extract data from an image.
 
@@ -54,3 +62,11 @@ $ now # deploy to production env
 ##### Response body (application/octet-stream)
 
 The payload data as a binary file.
+
+#### 5. `/api/reveal/testing`
+
+> Testing route for route #4.
+
+##### Response body (application/octet-stream)
+
+The payload data as a sample .zip file.
