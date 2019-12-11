@@ -4,7 +4,7 @@
     <h5 class="subtitle">Check if an image contains any secret data.</h5>
     <uploadForm
       title="Upload image to detect:"
-      acceptFile="image/*"
+      acceptFile="image/jpeg,image.png"
       :fileName="imageFileName"
       @input="changeImageFile"
     />
@@ -54,13 +54,13 @@ export default {
     },
     check() {
       const formData = new FormData()
-      formData.append('files', this.imageFile[0])
+      formData.append('files', this.imageFile)
       axios
         .post('/api/detect', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((response) => {
-          if (response.data.result !== undefined) {
+          if (response.data.result) {
             this.hasData = response.data.result
           } else {
             console.log(response.data.error)

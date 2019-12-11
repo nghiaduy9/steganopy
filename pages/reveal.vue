@@ -46,7 +46,7 @@ export default {
     return {
       imageFileName: 'No image choosen...',
       imageFile: null,
-      responseDataUrl: ''
+      responseDataUrl: 'abc'
     }
   },
   methods: {
@@ -55,10 +55,14 @@ export default {
       this.imageFileName = event[0].name
     },
     decode() {
+      const formData = new FormData()
+      formData.append('files', this.imageFile)
       axios
-        .post('/api/reveal')
+        .post('/api/reveal', formData, {
+          headers: { 'Content-Type': 'multipart/form-data' }
+        })
         .then((response) => {
-          if (response.data.url !== undefined) {
+          if (response.data.url) {
             this.responseDataUrl = response.data.url
           } else {
             console.log(response.data.error)

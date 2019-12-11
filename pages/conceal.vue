@@ -64,7 +64,7 @@ export default {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
         .then((response) => {
-          if (response.data.url !== undefined) {
+          if (response.data.url) {
             this.responseImageUrl = response.data.url
           } else {
             console.log(response.data.error)
