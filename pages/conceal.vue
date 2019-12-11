@@ -1,43 +1,28 @@
 <template>
-  <div class="is-centered">
-    <div class="card">
-      <header class="card-header">
-        <p class="card-header-title is-centered">ENCODE</p>
-      </header>
-      <div class="card-content">
-        <div class="content">
-          <upload-form
-            title="Upload secret data file:"
-            :file-name="secretFileName"
-            @input="changeSecretFile"
-          />
-          <upload-form
-            title="Upload image to hide:"
-            accept-file="image/*"
-            :file-name="imageFileName"
-            @input="changeImageFile"
-          />
-          <div class="columns">
-            <div class="control column">
-              <button class="button is-dark" @click="encode">Encode</button>
-            </div>
-          </div>
-          <div v-if="responseImageUrl">
-            <div class="field has-addons">
-              <div class="control">
-                <input class="input" type="text" :value="responseImageUrl" readonly />
-              </div>
-              <div class="control">
-                <a class="button is-info">
-                  <span class="file-icon">
-                    <ion-icon name="cloud-download"></ion-icon>
-                  </span>
-                  <span class="file-label" @click="dowloadResponseImage">Download</span>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
+  <div class="container">
+    <h3 class="title">Data concealing</h3>
+    <h5 class="subtitle">Embed data into an image.</h5>
+    <upload-form
+      title="Upload secret data file:"
+      :file-name="secretFileName"
+      @input="changeSecretFile"
+    />
+    <upload-form
+      title="Upload image to hide:"
+      accept-file="image/jpeg,image/png"
+      :file-name="imageFileName"
+      @input="changeImageFile"
+    />
+    <div class="columns">
+      <div class="control column">
+        <button class="button is-dark" @click="encode">Encode</button>
+      </div>
+    </div>
+    <div v-if="responseImageUrl">
+      <div>
+        <a :href="responseImageUrl" target="_blank">
+          <img :src="responseImageUrl" alt="Embed-image" />
+        </a>
       </div>
     </div>
   </div>
@@ -71,8 +56,6 @@ export default {
       this.imageFileName = event[0].name
     },
     encode() {
-      console.log(this.imageFile)
-      console.log(this.secretData)
       const formData = new FormData()
       formData.append('files', this.imageFile[0])
       formData.append('files', this.secretData[0])
@@ -80,10 +63,15 @@ export default {
         .post('/api/conceal', formData, {
           headers: { 'Content-Type': 'multipart/form-data' }
         })
-        .then((response) => console.log(response))
+        .then((response) => {
+          if (response.data.url !== undefined) {
+            this.responseImageUrl = response.data.url
+          } else {
+            console.log(response.data.error)
+          }
+        })
         .catch((errors) => console.log(errors))
-    },
-    dowloadResponseImage() {}
+    }
   }
 }
 </script>
