@@ -23,8 +23,8 @@ export default {
   background-image: url(/sample-image.jpg);
   background-position: center center;
   background-size: cover;
-  width: 400px;
-  height: 300px;
+  width: 20vw;
+  height: 50vh;
 }
 .box:hover {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),

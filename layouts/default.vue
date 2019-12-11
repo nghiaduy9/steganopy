@@ -16,6 +16,12 @@
           </nuxt-link>
         </li>
         <li>
+          <nuxt-link to="/detect">
+            <ion-icon name="search" />
+            &nbsp;Data detecting
+          </nuxt-link>
+        </li>
+        <li>
           <nuxt-link to="/reveal">
             <ion-icon name="eye" />
             &nbsp;Data revealing

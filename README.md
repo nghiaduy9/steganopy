@@ -59,7 +59,7 @@ $ now # deploy to production env
 
 #### 4. POST `/api/detect`
 
-> Check if this image cannot contain any secret data.
+> Check if an image contains any secret data.
 
 ##### Request body (multipart/form-data)
 

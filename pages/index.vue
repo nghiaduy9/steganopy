@@ -12,8 +12,15 @@
       </div>
       <div class="column">
         <feature-card
+          title="Data detecting"
+          description="Check if an image contains any secret data."
+          url="/detect"
+        />
+      </div>
+      <div class="column">
+        <feature-card
           title="Data revealing"
-          description="Extract data from an image."
+          description="Extract secret data from an image."
           url="/reveal"
         />
       </div>
