@@ -44,15 +44,7 @@ $ now # deploy to production env
 - `url` (string | `undefined`): If the operation successes, this contains the URL of the output image. `undefined` otherwise.
 - `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it can be either "BAD_INPUT" or "PAYLOAD_TOO_LARGE".
 
-#### 3. `/api/conceal/testing`
-
-> Testing route for route #2.
-
-##### Response body (application/json)
-
-- `url` (string): URL of a sample image.
-
-#### 4. POST `/api/reveal`
+#### 3. POST `/api/reveal`
 
 > Extract secret data from an image.
 
@@ -60,21 +52,12 @@ $ now # deploy to production env
 
 - `files` (array): Array of 1 file: the image containing embeded data.
 
-##### Response body (application/octet-stream | application/json)
+##### Response body (application/json)
 
-If the operation successes, the response body contains the secret data as application/octet-stream. Otherwise, it is application/json with:
+- `url` (string | `undefined`): If the operation successes, this contains the URL of the extracted data. `undefined` otherwise.
+- `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it can be either "BAD_INPUT" or "PAYLOAD_NOT_EXISTS".
 
-- `error` (string): Either "BAD_INPUT" or "PAYLOAD_NOT_EXISTS".
-
-#### 5. `/api/reveal/testing`
-
-> Testing route for route #4.
-
-##### Response body (application/octet-stream)
-
-A sample .zip file as the secret data.
-
-#### 6. POST `/api/detect`
+#### 4. POST `/api/detect`
 
 > Check if this image cannot contain any secret data.
 
@@ -84,5 +67,5 @@ A sample .zip file as the secret data.
 
 ##### Response body (application/json)
 
-- `result` (boolean): `false` if this image cannot contain any secret data, `true` if it MAY contain.
-- `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it can be "BAD_INPUT".
+- `result` (boolean | `undefined`): If the operation successes, it can be either `false` if this image cannot contain any secret data or `true` if it MAY contain. `undefined` otherwise.
+- `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it is "BAD_INPUT".

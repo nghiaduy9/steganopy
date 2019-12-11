@@ -19,6 +19,7 @@ async def index(request, path):
         return response.json({"error": "BAD_INPUT"})
 
     cover_img, payload_file = files[:2]
+    cover_name = cover_img.name
     cover_buffer = cover_img.body
     payload_buffer = payload_file.body
 
@@ -29,7 +30,7 @@ async def index(request, path):
 
     try:
         output_buffer = conceal(img, payload_buffer)
-        url = save_to_storage(cover_img.name, output_buffer, "image/png")
+        url = save_to_storage(cover_name, output_buffer, "image/png")
         return response.json({"url": url})
     except Exception as e:
         print(e)
