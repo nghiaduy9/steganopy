@@ -5,18 +5,8 @@ import struct
 import numpy as np
 
 
-class SteganopyException(Exception):
-    pass
-
-
-def conceal(img_buffer: bytes, payload_buffer: bytes) -> bytes:
+def conceal(img: Image, payload_buffer: bytes) -> bytes:
     """Embed data into an image, and return the output image."""
-
-    img = Image.open(BytesIO(img_buffer))
-    width, height = img.size
-
-    if not _validate_payload_size(width, height, len(payload_buffer)):
-        raise SteganopyException("Cannot process. The payload is too large.")
 
     img_arr = np.array(img.convert("RGBA"))
 
@@ -34,19 +24,12 @@ def conceal(img_buffer: bytes, payload_buffer: bytes) -> bytes:
     return output_buffer.getvalue()
 
 
-def reveal(img_buffer: bytes) -> bytes:
+def reveal(img: Image) -> bytes:
     """Extract secret data from an image."""
 
-    img = Image.open(BytesIO(img_buffer))
     img_arr = np.asarray(img.convert("RGBA")).ravel()
 
-    payload_size_bits = np.empty(32, np.uint8)
-    i = 0
-    for color in np.nditer(img_arr[:32]):
-        payload_size_bits[i] = _get_bit(color)
-        i += 1
-    payload_size = _assemble_int(payload_size_bits)  # bytes
-
+    payload_size = _get_payload_size(img_arr)
     bits_len = payload_size * 8  # bits
     payload_bits = np.empty(bits_len, np.uint8)
     i = 0
@@ -58,12 +41,29 @@ def reveal(img_buffer: bytes) -> bytes:
     return _assemble(payload_bits)
 
 
-def _validate_payload_size(img_w: int, img_h: int, payload_size: int) -> bool:
-    """Return True if the payload is small enough, relative to the cover image."""
+def detect(img: Image) -> bool:
+    """Return False if this image cannot contain any secret data. Return True if it MAY contain."""
 
+    img_arr = np.asarray(img.convert("RGBA")).ravel()
+    payload_size = _get_payload_size(img_arr)
+    return payload_size <= get_max_payload_size(img)
+
+
+def validate_payload_size(img: Image, payload_buffer: bytes) -> bool:
+    """Return True if the payload size is small enough, relative to the cover image."""
+
+    max_payload_size = get_max_payload_size(img)
+    payload_size = len(payload_buffer)
+    return payload_size <= max_payload_size
+
+
+def get_max_payload_size(img: Image) -> int:
+    """Get the maximum payload size this image can conceal."""
+
+    width, height = img.size
     # conceal data in 4-channel pixels, 1 bit per channel
-    max_size = img_w * img_h // 2  # bytes, (4 * img_w * img_h // 8) actually
-    return payload_size <= max_size - 4  # need 4 bytes to store the payload size
+    # and need another 4 bytes to store the payload size
+    return (width * height // 2) - 4  # bytes, (4 * img_w * img_h // 8) - 4 actually
 
 
 def _decompose(data: bytes) -> list:
@@ -74,6 +74,17 @@ def _decompose(data: bytes) -> list:
     byte_arr[:4] = tuple(struct.pack("i", size))
     byte_arr[4:] = tuple(data)
     return np.unpackbits(byte_arr)
+
+
+def _get_payload_size(img_arr: np.ndarray) -> int:
+    """Get the payload size this image may contain."""
+
+    payload_size_bits = np.empty(32, np.uint8)
+    i = 0
+    for color in np.nditer(img_arr[:32]):
+        payload_size_bits[i] = _get_bit(color)
+        i += 1
+    return _assemble_int(payload_size_bits)  # bytes
 
 
 def _assemble_int(bit_arr: np.ndarray) -> int:

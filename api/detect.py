@@ -3,7 +3,7 @@ from PIL import Image
 
 from sanic import Sanic, response
 
-from api._stegano import detect, reveal
+from api._stegano import detect
 
 
 app = Sanic()
@@ -22,12 +22,4 @@ async def index(request, path):
 
     img = Image.open(BytesIO(img_buffer))
 
-    if not detect(img):
-        return response.json({"error": "PAYLOAD_NOT_EXISTS"})
-
-    try:
-        payload_buffer = reveal(img)
-        return response.raw(payload_buffer)
-    except Exception as e:
-        print(e)
-        return response.json({}, status=500)
+    return response.json({"result": detect(img)})
