@@ -19,7 +19,6 @@ async def index(request, path):
         return response.json({"error": "BAD_INPUT"})
 
     img_file = files[0]
-    img_name = img_file.name
     img_buffer = img_file.body
 
     img = Image.open(BytesIO(img_buffer))
@@ -29,9 +28,7 @@ async def index(request, path):
 
     try:
         output_buffer = reveal(img)
-        url = save_to_storage(
-            img_name + "-data", output_buffer, "application/octet-stream"
-        )
+        url = save_to_storage("data", output_buffer, "application/octet-stream")
         return response.json({"url": url})
     except Exception as e:
         print(e)
