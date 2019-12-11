@@ -41,7 +41,8 @@ $ now # deploy to production env
 
 ##### Response body (application/json)
 
-- `url` (string): Public URL of the output image.
+- `url` (string | `undefined`): If the operation successes, this contains the URL of the output image. `undefined` otherwise.
+- `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it can be either "BAD_INPUT" or "PAYLOAD_TOO_LARGE".
 
 #### 3. `/api/conceal/testing`
 
@@ -49,19 +50,21 @@ $ now # deploy to production env
 
 ##### Response body (application/json)
 
-- `url` (string): Public URL of a sample image.
+- `url` (string): URL of a sample image.
 
 #### 4. POST `/api/reveal`
 
-> Extract data from an image.
+> Extract secret data from an image.
 
 ##### Request body (multipart/form-data)
 
 - `files` (array): Array of 1 file: the image containing embeded data.
 
-##### Response body (application/octet-stream)
+##### Response body (application/octet-stream | application/json)
 
-The payload data as a binary file.
+If the operation successes, the response body contains the secret data as application/octet-stream. Otherwise, it is application/json with:
+
+- `error` (string): Either "BAD_INPUT" or "PAYLOAD_NOT_EXISTS".
 
 #### 5. `/api/reveal/testing`
 
@@ -69,4 +72,17 @@ The payload data as a binary file.
 
 ##### Response body (application/octet-stream)
 
-The payload data as a sample .zip file.
+A sample .zip file as the secret data.
+
+#### 6. POST `/api/detect`
+
+> Check if this image cannot contain any secret data.
+
+##### Request body (multipart/form-data)
+
+- `files` (array): Array of 1 file: the image containing embeded data.
+
+##### Response body (application/json)
+
+- `result` (boolean): `false` if this image cannot contain any secret data, `true` if it MAY contain.
+- `error` (string | `undefined`): If the operation successes, this is `undefined`. Otherwise, it can be "BAD_INPUT".
