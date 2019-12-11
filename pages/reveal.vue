@@ -46,7 +46,7 @@ export default {
     return {
       imageFileName: 'No image choosen...',
       imageFile: null,
-      responseDataUrl: 'abc'
+      responseDataUrl: ''
     }
   },
   methods: {
